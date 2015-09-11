@@ -16,7 +16,7 @@ namespace Lesson1.Actors
         protected override void OnReceive(object message)
         {
             var readedLine = Console.ReadLine();
-            if (!string.IsNullOrEmpty(readedLine) && String.Equals(readedLine, ExitCommand, StringComparison.OrdinalIgnoreCase))
+            if (!string.IsNullOrEmpty(readedLine) && string.Equals(readedLine, ExitCommand, StringComparison.OrdinalIgnoreCase))
             {
 
                 Context.System.Shutdown();
