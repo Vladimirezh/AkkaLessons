@@ -1,16 +1,17 @@
-﻿using Akka.Actor;
-using System;
+﻿using System;
+using Akka.Actor;
+using Lesson1.Actors;
 
 namespace Lesson1
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            var system = ActorSystem.Create("TestSystem");
-            var writer = system.ActorOf(Props.Create((() => new Actors.ConsoleWriterActor())), "Writer");
-            var reader = system.ActorOf(Props.Create(typeof(Actors.ConsoleActorReader), writer), "Reader");
-            reader.Tell("start");
+            var system = ActorSystem.Create( "TestSystem" );
+            var writer = system.ActorOf( Props.Create( ( () => new ConsoleWriterActor() ) ), "Writer" );
+            var reader = system.ActorOf( Props.Create( typeof ( ConsoleActorReader ), writer ), "Reader" );
+            reader.Tell( "start" );
             system.AwaitTermination();
             Console.ReadKey();
         }

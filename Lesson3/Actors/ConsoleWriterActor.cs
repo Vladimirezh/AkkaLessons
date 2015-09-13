@@ -1,7 +1,7 @@
 ﻿using System;
 using Akka.Actor;
 
-namespace Lesson2.Actors
+namespace Lesson3.Actors
 {
     internal sealed class ConsoleWriterActor : UntypedActor
     {

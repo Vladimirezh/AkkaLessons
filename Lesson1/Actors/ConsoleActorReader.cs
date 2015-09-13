@@ -1,30 +1,29 @@
-﻿using Akka.Actor;
-using System;
+﻿using System;
+using Akka.Actor;
 
 namespace Lesson1.Actors
 {
     public class ConsoleActorReader : UntypedActor
     {
-        private readonly string ExitCommand = "end";
-        private IActorRef writer;
+        private const string exitCommand = "end";
+        private readonly IActorRef writer;
 
-        public ConsoleActorReader(IActorRef writer)
+        public ConsoleActorReader( IActorRef writer )
         {
             this.writer = writer;
         }
 
-        protected override void OnReceive(object message)
+        protected override void OnReceive( object message )
         {
             var readedLine = Console.ReadLine();
-            if (!string.IsNullOrEmpty(readedLine) && string.Equals(readedLine, ExitCommand, StringComparison.OrdinalIgnoreCase))
+            if ( !string.IsNullOrEmpty( readedLine ) && string.Equals( readedLine, exitCommand, StringComparison.OrdinalIgnoreCase ) )
             {
-
                 Context.System.Shutdown();
                 return;
             }
-            writer.Tell(new MessageClass(readedLine));
-            Console.WriteLine("OnReceive ended");
-            Self.Tell("continue");
+            writer.Tell( new MessageClass( readedLine ) );
+            Console.WriteLine( "OnReceive ended" );
+            Self.Tell( "continue" );
         }
     }
 }
